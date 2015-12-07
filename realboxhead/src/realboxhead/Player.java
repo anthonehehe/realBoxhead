@@ -2,6 +2,8 @@ package realboxhead;
 
 import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
+
 public class Player extends GameObject {
 
 	/**
@@ -9,35 +11,35 @@ public class Player extends GameObject {
 	 */
 	private static final long serialVersionUID = 1L;
 	int health;
-	int speed = 4;
-	public boolean playerUp = false;
+	double speed = 27.75;
+	public boolean playerUp;
 	public boolean playerDown;
 	public boolean playerLeft;
 	public boolean playerRight;
 	String name;
 
 	public Player(String name) {
-		x = 50;
-		y = 50;
-		height = 30;
-		width = 15;
+		this.setLocation(50, 50);
+		this.setSize(15, 30);
 		this.name = name;
+		//setIcon(new ImageIcon(getClass().getResource("banana.jpg")));
 	}
 
 	public void draw(Graphics g) {
-		g.drawRect(x, y, height, width);
-		// g.fillRect(x,y,height,width);
+		//g.drawRect(50, 50, 15, 30);
+		g.fillRect(getLocation().x, getLocation().y, 15, 30);
 	}
 
 	public int getHP() {
 		return health;
 	}
 
-	public int setSpd() {
+	public double setSpd() {
 		// equal to 100 (default speed) - weight of the gun
+		return 1d;
 	}
 
-	public int getSpd() {
+	public double getSpd() {
 		return speed;
 	}
 
@@ -45,28 +47,35 @@ public class Player extends GameObject {
 	// }
 
 	public void moveLeft() {
-
-		x -= getSpd();
-		System.out.println("left");
-
+		int x = getX() - ((int) getSpd());
+		if (x < 0) {
+			x = 0;
+		}
+		setLocation(x, getY());
 	}
 
 	public void moveRight() {
-
-		x += getSpd();
-
+		int x = getX() + ((int) getSpd());
+		if (x > Screen.WIDTH - getWidth()) {
+			x = (Screen.WIDTH - getWidth());
+		}
+		setLocation(x, getY());
 	}
 
 	public void moveUp() {
-
-		y -= getSpd();
-
+		int y = getY() - ((int) getSpd());
+		if (y < 0) {
+			y = 0;
+		}
+		setLocation(getX(), y);
 	}
 
 	public void moveDown() {
-
-		y += getSpd();
-
+		int y = getY() + ((int) getSpd());
+		if (y > Screen.HEIGHT - getHeight()) {
+			y = Screen.HEIGHT - getHeight();
+		}
+		setLocation(getX(), y);
 	}
 
 	public void movement() {
