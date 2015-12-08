@@ -18,16 +18,16 @@ public class MainMenu extends JPanel {
 		setBackground(Color.BLACK);
 		
 		// add a button
-		JButton mainButton = new JButton("Start");
+		JButton levelButton = new JButton("Level Selection");
 		//set the button to switch to the start stage
-		mainButton.addMouseListener(new MouseAdapter() {
+		levelButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				screen.cl.show(screen, "level");
+				screen.cl.show(screen.getContentPane(), "levels");
 			}
 		});
-		this.add(mainButton);
+		this.add(levelButton);
 		
 	
 	}

@@ -24,6 +24,7 @@ public class Screen extends JFrame implements ActionListener {
 	
 	public Screen() {
 		menu = new MainMenu(this);
+		levels = new LevelStage(this);
 		setTitle("Boxhead: Apocalypse");
 		setSize(HEIGHT, WIDTH);
 		setVisible(true);
@@ -31,8 +32,8 @@ public class Screen extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pane = getContentPane();
 		pane.setLayout(cl);
-		pane.add(menu);
-		pane.add(levels);
+		pane.add(menu, "menu");
+		pane.add(levels, "levels");
 		pane.setVisible(true);
 		init();
 
