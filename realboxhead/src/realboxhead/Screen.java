@@ -16,32 +16,36 @@ public class Screen extends JFrame implements ActionListener {
 	static final int HEIGHT = 800;
 	static final int WIDTH = 800;
 
-	public Player player = new Player("TonEY");
 	public MainMenu menu;
 	public Container pane;
 	public LevelStage levels;
+	public GameStage gStage;
 	public CardLayout cl = new CardLayout();
 	
 	public Screen() {
-		menu = new MainMenu(this);
-		levels = new LevelStage(this);
 		setTitle("Boxhead: Apocalypse");
 		setSize(HEIGHT, WIDTH);
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		menu = new MainMenu(this);
+		levels = new LevelStage(this);
+		gStage = new GameStage(this);
+		
 		pane = getContentPane();
 		pane.setLayout(cl);
 		pane.add(menu, "menu");
 		pane.add(levels, "levels");
+		pane.add(gStage, "play");
 		pane.setVisible(true);
 		init();
 
 	}
 
 	private void init() {
-		// TODO Auto-generated method stub
 		time.start();
+		setFocusable(true);
 		addKeyListener(new Input(this));
 	}
 
@@ -49,21 +53,9 @@ public class Screen extends JFrame implements ActionListener {
 		Screen screen = new Screen();
 	}
 
-	// public void paint(Graphics g) {
-	// g.clearRect(0, 0, WIDTH, HEIGHT);
-	// player.draw(g);
-	// }
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		update();
 		repaint();
 
 	}
-
-	private void update() {
-		player.movement();
-
-	}
-
 }

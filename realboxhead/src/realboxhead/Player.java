@@ -1,8 +1,11 @@
 package realboxhead;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 public class Player extends GameObject {
 
@@ -10,6 +13,7 @@ public class Player extends GameObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	GameStage gs;
 	int health;
 	double speed = 27.75;
 	public boolean playerUp;
@@ -17,18 +21,38 @@ public class Player extends GameObject {
 	public boolean playerLeft;
 	public boolean playerRight;
 	String name;
+	
+	int h1;
+	int h2;
+	int diff;
+	
+	int w1;
+	int w2;
+	int wdiff;
+	
 
-	public Player(String name) {
+	public Player(GameStage gs, String name) {
+		this.gs = gs;
 		this.setLocation(50, 50);
 		this.setSize(15, 30);
 		this.name = name;
-		//setIcon(new ImageIcon(getClass().getResource("banana.jpg")));
+			//setIcon(new ImageIcon(getClass().getResource("banana.jpg")));
+		
+		h1 = gs.getHeight();
+		h2 = gs.screen.getHeight();
+		diff = h2 - h1;
+		
+		w1 = gs.getWidth();
+		w2 = gs.screen.getWidth();
+		wdiff = w2 - w1;
 	}
 
 	public void draw(Graphics g) {
 		//g.drawRect(50, 50, 15, 30);
 		g.fillRect(getLocation().x, getLocation().y, 15, 30);
 	}
+	
+	
 
 	public int getHP() {
 		return health;
@@ -56,8 +80,8 @@ public class Player extends GameObject {
 
 	public void moveRight() {
 		int x = getX() + ((int) getSpd());
-		if (x > Screen.WIDTH - getWidth()) {
-			x = (Screen.WIDTH - getWidth());
+		if (x + getWidth() > Screen.WIDTH - wdiff) {
+			x = (Screen.WIDTH - getWidth()) - wdiff;
 		}
 		setLocation(x, getY());
 	}
@@ -72,8 +96,9 @@ public class Player extends GameObject {
 
 	public void moveDown() {
 		int y = getY() + ((int) getSpd());
-		if (y > Screen.HEIGHT - getHeight()) {
-			y = Screen.HEIGHT - getHeight();
+		
+		if (y + getHeight() > Screen.HEIGHT - diff) {
+			y = (Screen.HEIGHT - diff) - getHeight();
 		}
 		setLocation(getX(), y);
 	}
@@ -93,5 +118,4 @@ public class Player extends GameObject {
 		}
 
 	}
-
 }

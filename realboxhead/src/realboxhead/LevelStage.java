@@ -28,7 +28,13 @@ public class LevelStage extends JPanel{
 		});
 		this.add(mainButton);
 		
-		JButton butt = new JButton("Yes");
+		JButton butt = new JButton("Play");
+		butt.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				screen.cl.show(screen.getContentPane(), "play" );
+			}
+		});
 		this.add(butt);
 		
 	}

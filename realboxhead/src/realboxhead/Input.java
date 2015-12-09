@@ -7,27 +7,29 @@ public class Input implements KeyListener {
      Screen screen;
      
 	public Input(Screen screen) {
-		// TODO Auto-generated constructor stub
 		 this.screen = screen;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			screen.player.playerUp = true;
+			screen.gStage.player.playerUp = true;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			screen.player.playerDown = true;
+			screen.gStage.player.playerDown = true;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			screen.player.playerLeft = true;
+			screen.gStage.player.playerLeft = true;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			screen.player.playerRight = true;
+			screen.gStage.player.playerRight = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_E) {
+			Player player = screen.gStage.player;
+			System.out.println(player.getY());
 		}
 	}
 
@@ -35,26 +37,23 @@ public class Input implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			screen.player.playerUp = false;
+			screen.gStage.player.playerUp = false;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			screen.player.playerDown = false;
+			screen.gStage.player.playerDown = false;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			screen.player.playerLeft = false;
+			screen.gStage.player.playerLeft = false;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			screen.player.playerRight = false;
+			screen.gStage.player.playerRight = false;
 		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
-
 }
