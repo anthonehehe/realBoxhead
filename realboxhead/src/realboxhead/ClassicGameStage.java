@@ -1,6 +1,5 @@
 package realboxhead;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +9,10 @@ import javax.swing.Timer;
 
 public class ClassicGameStage extends JPanel implements ActionListener {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Screen screen;
 	Player player;
 	Timer timer;
@@ -27,7 +30,7 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 		setVisible(true);
 		this.timer = new Timer(1000/120, this);
 		this.player = new Player(this, "ean");
-		
+		this.add(player);
 		this.timer.start();
 	}
 
@@ -39,8 +42,8 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 	protected void paintComponent(Graphics g) {
 		g.clearRect(0, 0, getWidth(), getHeight());
 		player.movement();
-		player.draw(g);
-		g.setColor(Color.GRAY);
+		//player.draw(g);
+		//g.setColor(Color.GRAY);
 	}
 	
 	@Override

@@ -2,16 +2,18 @@ package realboxhead;
 
 import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
+
 
 public class Player extends GameObject {
 
 
 	private static final long serialVersionUID = 1L;
 	ClassicGameStage gs;
-	int health;
-	double speed = 27.75;
-	public int width = 15;
-	public int height = 30;
+	int health = 250;
+	int speed = 2;
+	public int width = 45;
+	public int height = 60;
 	public boolean playerUp;
 	public boolean playerDown;
 	public boolean playerLeft;
@@ -27,9 +29,10 @@ public class Player extends GameObject {
 	public Player(ClassicGameStage gs, String name) {
 		this.gs = gs;
 		this.setLocation(50, 50);
-		this.setSize(getWidth(), getHeight());
 		this.name = name;
-		//setIcon(new ImageIcon(getClass().getResource("banana.jpg")));
+		setIcon(new ImageIcon(getClass().getResource("banana1.jpg")));
+		
+		//this.setSize(getWidth(), getHeight());
 		
 		//h1 = gs.getHeight();
 		//h2 = gs.screen.getHeight();
@@ -44,25 +47,28 @@ public class Player extends GameObject {
 		 * Draws the player onto the game stage
 		 * @param g
 		 */
+	/*
 	public void draw(Graphics g) {
 		//g.drawRect(50, 50, 15, 30);
 		g.fillRect(getLocation().x, getLocation().y, getWidth(), getHeight());
 	}
-	
+	*/
 	
 	public int getHP() {
 		return health;
 	}
 
+	/*
 	public double setSpd() {
 		// equal to 100 (default speed) - weight of the gun
 		return 1d;
 	}
-
-	public double getSpd() {
+	 */
+	public int getSpd() {
 		return speed;
 	}
 	
+	/*
 	public int getWidth() {
 		return width;
 	}
@@ -70,12 +76,12 @@ public class Player extends GameObject {
 	public int getHeight() {
 		return height;
 	}
-
+	 */
 	// public boolean checkCollide() {
 	// }
 
 	public void moveLeft() {
-		int x = getX() - ((int) getSpd());
+		int x = getX() - speed;
 		if (x < 0) {
 			x = 0;
 		}
@@ -83,7 +89,7 @@ public class Player extends GameObject {
 	}
 
 	public void moveRight() {
-		int x = getX() + ((int) getSpd());
+		int x = getX() +  speed;
 		if (x + getWidth() > gs.getWidth()) {
 			x = (gs.getWidth() - getWidth());
 		}
@@ -91,7 +97,7 @@ public class Player extends GameObject {
 	}
 
 	public void moveUp() {
-		int y = getY() - ((int) getSpd());
+		int y = getY() - speed;
 		if (y < 0) {
 			y = 0;
 
@@ -100,7 +106,7 @@ public class Player extends GameObject {
 	}
 
 	public void moveDown() {
-		int y = getY() + ((int) getSpd());
+		int y = getY() + speed;
 		
 		if (y + getHeight() > gs.getHeight()) {
 			y = (gs.getHeight()) - getHeight();
@@ -109,7 +115,8 @@ public class Player extends GameObject {
 	}
 
 	/**
-	 * checks if the player wants to move
+	 * Moves the player based on which 
+	 * directional key is pressed
 	 */
 	public void movement() {
 		if (playerUp) {

@@ -24,7 +24,7 @@ public class Screen extends JFrame  {
 	 */
 	public Screen() {
 		setTitle("Boxhead: Apocalypse");
-		setSize(HEIGHT, WIDTH);
+		setSize(WIDTH, HEIGHT);
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
