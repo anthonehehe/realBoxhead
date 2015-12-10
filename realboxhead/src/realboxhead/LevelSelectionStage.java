@@ -7,18 +7,23 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class LevelStage extends JPanel{
+public class LevelSelectionStage extends JPanel{
 	
 	Screen screen;
 	
-	public LevelStage(Screen screen) {
+	/**
+	 * Constructor for the level selection stage, 
+	 * sets its properties and places buttons on the
+	 * stage that listen for mouse events
+	 * @param screen
+	 */
+	public LevelSelectionStage(Screen screen) {
 		this.screen = screen;
 		setVisible(true);
 		setBackground(Color.RED);
-		setBounds(500,500,500,500);
+		
 		
 		JButton mainButton = new JButton("Back To Main Menu");
-		//set the button to switch to the start stage
 		mainButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -27,6 +32,7 @@ public class LevelStage extends JPanel{
 			}
 		});
 		this.add(mainButton);
+		
 		
 		JButton butt = new JButton("Play");
 		butt.addMouseListener(new MouseAdapter() {

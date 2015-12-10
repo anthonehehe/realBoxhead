@@ -1,27 +1,27 @@
 package realboxhead;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.Timer;
 
-public class Screen extends JFrame implements ActionListener {
 
-	Timer time = new Timer(1000 / 60, this);
+public class Screen extends JFrame  {
+
 	static final int HEIGHT = 800;
 	static final int WIDTH = 800;
 
 	public MainMenu menu;
 	public Container pane;
-	public LevelStage levels;
-	public GameStage gStage;
+	public LevelSelectionStage levels;
+	public ClassicGameStage gStage;
 	public CardLayout cl = new CardLayout();
 	
+	
+	/**
+	 * Constructor for screen, sets its properties 
+	 * and adds JPanels so they can be used 
+	 */
 	public Screen() {
 		setTitle("Boxhead: Apocalypse");
 		setSize(HEIGHT, WIDTH);
@@ -30,8 +30,8 @@ public class Screen extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		menu = new MainMenu(this);
-		levels = new LevelStage(this);
-		gStage = new GameStage(this);
+		levels = new LevelSelectionStage(this);
+		gStage = new ClassicGameStage(this);
 		
 		pane = getContentPane();
 		pane.setLayout(cl);
@@ -42,9 +42,13 @@ public class Screen extends JFrame implements ActionListener {
 		init();
 
 	}
-
+	
+	/**
+	 * Starts the timer and 
+	 * implements a key listener for the screen
+	 * 
+	 */
 	private void init() {
-		time.start();
 		setFocusable(true);
 		addKeyListener(new Input(this));
 	}
@@ -53,9 +57,5 @@ public class Screen extends JFrame implements ActionListener {
 		Screen screen = new Screen();
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		repaint();
 
-	}
 }
