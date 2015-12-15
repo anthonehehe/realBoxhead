@@ -19,24 +19,24 @@ public class Input implements KeyListener {
 	 * when they are pressed
 	 */
 	public void keyPressed(KeyEvent e) {
+		Player player = (screen.screen.equals("classic") ? screen.gStage.player : screen.eStage.player); 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			screen.gStage.player.playerUp = true;
+			player.playerUp = true;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			screen.gStage.player.playerDown = true;
+			player.playerDown = true;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			screen.gStage.player.playerLeft = true;
+			player.playerLeft = true;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			screen.gStage.player.playerRight = true;
+			player.playerRight = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_E) {
-			Player player = screen.gStage.player;
-			System.out.println(player.getY());
+			player.shoot();
 		}
 	}
 
@@ -48,20 +48,22 @@ public class Input implements KeyListener {
 	 */
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		Player player = (screen.screen.equals("classic") ? screen.gStage.player : screen.eStage.player); 
+
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			screen.gStage.player.playerUp = false;
+			player.playerUp = false;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			screen.gStage.player.playerDown = false;
+			player.playerDown = false;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			screen.gStage.player.playerLeft = false;
+			player.playerLeft = false;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			screen.gStage.player.playerRight = false;
+			player.playerRight = false;
 		}
 	}
 

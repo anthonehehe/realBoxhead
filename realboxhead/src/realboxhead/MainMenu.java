@@ -41,7 +41,7 @@ public class MainMenu extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				screen.cl.show(screen.getContentPane(), "levels");
+				screen.cl.show(screen.getContentPane(), "options");
 			}
 		});
 		this.add(optionsButton);

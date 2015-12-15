@@ -11,10 +11,13 @@ public class Screen extends JFrame  {
 	static final int HEIGHT = 800;
 	static final int WIDTH = 800;
 
+	public String screen;
 	public MainMenu menu;
 	public Container pane;
 	public LevelSelectionStage levels;
 	public ClassicGameStage gStage;
+	public OptionsMenuStage optStage;
+	public EndlessGameStage eStage;
 	public CardLayout cl = new CardLayout();
 	
 	
@@ -32,12 +35,16 @@ public class Screen extends JFrame  {
 		menu = new MainMenu(this);
 		levels = new LevelSelectionStage(this);
 		gStage = new ClassicGameStage(this);
+		eStage = new EndlessGameStage(this);
+		optStage = new OptionsMenuStage(this);
 		
 		pane = getContentPane();
 		pane.setLayout(cl);
 		pane.add(menu, "menu");
 		pane.add(levels, "levels");
-		pane.add(gStage, "play");
+		pane.add(gStage, "classic");
+		pane.add(eStage, "endless");
+		pane.add(optStage, "options");
 		pane.setVisible(true);
 		init();
 

@@ -29,19 +29,32 @@ public class LevelSelectionStage extends JPanel{
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				screen.cl.show(screen.getContentPane(), "menu");
+				screen.screen = "menu";
 			}
 		});
 		this.add(mainButton);
 		
 		
-		JButton butt = new JButton("Play");
-		butt.addMouseListener(new MouseAdapter() {
+		JButton classicModeButton = new JButton("Classic Mode");
+		classicModeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				screen.cl.show(screen.getContentPane(), "play" );
+				screen.cl.show(screen.getContentPane(), "classic" );
+				screen.screen = "classic";
 			}
 		});
-		this.add(butt);
+		this.add(classicModeButton);
+		
+
+		JButton endlessModeButton = new JButton("Endless Mode");
+		endlessModeButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				screen.cl.show(screen.getContentPane(), "endless" );
+				screen.screen = "endless";
+			}
+		});
+		this.add(endlessModeButton);
 		
 	}
 

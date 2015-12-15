@@ -1,17 +1,18 @@
 package realboxhead;
 
-import java.awt.Graphics;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 
 public class Player extends GameObject {
 
 
 	private static final long serialVersionUID = 1L;
-	ClassicGameStage gs;
+	JPanel gs;
 	int health = 250;
-	int speed = 2;
+	public int speed = 3;
 	public int width = 45;
 	public int height = 60;
 	public boolean playerUp;
@@ -20,15 +21,16 @@ public class Player extends GameObject {
 	public boolean playerRight;
 	String name;
 
+	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	
 	/**
 	 * Constructor for the player with preset location and size
 	 * @param gs
 	 * @param name
 	 */
-	public Player(ClassicGameStage gs, String name) {
+	public Player(JPanel gs, String name) {
 		this.gs = gs;
-		this.setLocation(50, 50);
+		this.setLocation(350, 350);
 		this.name = name;
 		setIcon(new ImageIcon(getClass().getResource("banana1.jpg")));
 		
@@ -47,6 +49,7 @@ public class Player extends GameObject {
 		 * Draws the player onto the game stage
 		 * @param g
 		 */
+	
 	/*
 	public void draw(Graphics g) {
 		//g.drawRect(50, 50, 15, 30);
@@ -68,6 +71,14 @@ public class Player extends GameObject {
 		return speed;
 	}
 	
+	public void shoot() {
+		Bullet p = new Bullet(getX(), getY());
+		bullets.add(p);
+	}
+	
+	public ArrayList getBullets() {
+		return bullets;
+	}
 	/*
 	public int getWidth() {
 		return width;
@@ -89,7 +100,7 @@ public class Player extends GameObject {
 	}
 
 	public void moveRight() {
-		int x = getX() +  speed;
+		int x = getX() + speed;
 		if (x + getWidth() > gs.getWidth()) {
 			x = (gs.getWidth() - getWidth());
 		}
@@ -131,6 +142,8 @@ public class Player extends GameObject {
 		if (playerRight) {
 			moveRight();
 		}
+
+//		System.out.println(getX() + ":" + getY());
 
 	}
 }
