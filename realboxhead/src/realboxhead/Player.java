@@ -72,7 +72,7 @@ public class Player extends GameObject {
 	}
 	
 	public void shoot() {
-		Bullet p = new Bullet(getX(), getY());
+		Bullet p = new Bullet(this, getX(), getY());
 		bullets.add(p);
 	}
 	

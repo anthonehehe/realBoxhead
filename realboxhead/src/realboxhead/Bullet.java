@@ -5,28 +5,73 @@ public class Bullet extends GameObject {
 	/**
 	 * 
 	 */
+	Player player;
+	Screen screen;
+	
 	private static final long serialVersionUID = 1L;
 	
-		private int x, y, speedX;
+		private int x, y, speedX, speedY;
 		private boolean visible;
+		boolean bulletLeft, bulletRight, bulletUp, bulletDown = false;
 		
-		public Bullet(int startX, int startY){
+		public Bullet(Player player, int startX, int startY){
 			x = startX;
 			y = startY;
+			this.player = player;
+			if (player.playerLeft) {
+				bulletLeft = true;
+			} 
+			
+			if (player.playerRight) {
+				bulletRight = true;
+			}
+			// while bullet.x + bullet.y does not equal mouse.x + mouse.y
+			//	while bullet.x does not equal mouse.x 
+			// 		add speedX to bullet.x
+			//	while bullet.y does not equal mouse.y
+			// 		add speedY to bullet.y
+			if (player.playerUp){
+				bulletUp = true;
+			}
+			
+			if (player.playerDown) {
+				bulletDown = true;
+			}
 			speedX = 7;
+			speedY = 7;
 			visible = true;
 		}
 		
 		public void update(){
-			if (left) {
+			if (bulletLeft) {
 				x -= speedX;
-			} 
-			
-			if (right) {
-				
 			}
-			x += speedX;
-			if (x > 800){
+			
+			if (bulletRight) {
+				x += speedX;
+			}
+			
+			if (bulletUp) {
+				y -= speedY;
+			}
+			
+			if (bulletDown) {
+				y += speedY;
+			}
+			
+			if (x > player.gs.getWidth()){
+				visible = false;
+			}
+			
+			if (y > player.gs.getHeight()) {
+				visible = false;
+			}
+			
+			if (x < 0) {
+				visible = false;
+			}
+			
+			if (y < 0) {
 				visible = false;
 			}
 			
