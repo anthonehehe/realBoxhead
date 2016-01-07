@@ -14,7 +14,7 @@ public class LevelSelectionStage extends JPanel{
 	/**
 	 * Constructor for the level selection stage, 
 	 * sets its properties and places buttons on the
-	 * stage that listen for mouse events
+	 * stage that switch between screens when pressed
 	 * @param screen
 	 */
 	public LevelSelectionStage(Screen screen) {
