@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 
 public class Player extends GameObject {
 
+	public enum Face {
+		LEFT, RIGHT, UP, DOWN
+	}
 
 	private static final long serialVersionUID = 1L;
 	JPanel gs;
@@ -19,6 +22,7 @@ public class Player extends GameObject {
 	public boolean playerDown;
 	public boolean playerLeft;
 	public boolean playerRight;
+	public Face face = Player.Face.RIGHT;
 	String name;
 
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
@@ -72,7 +76,7 @@ public class Player extends GameObject {
 	}
 	
 	public void shoot() {
-		Bullet p = new Bullet(getX(), getY());
+		Bullet p = new Bullet(this, getX(), getY());
 		bullets.add(p);
 	}
 	
@@ -92,6 +96,7 @@ public class Player extends GameObject {
 	// }
 
 	public void moveLeft() {
+		face = Player.Face.LEFT;
 		int x = getX() - speed;
 		if (x < 0) {
 			x = 0;
@@ -100,6 +105,7 @@ public class Player extends GameObject {
 	}
 
 	public void moveRight() {
+		face = Player.Face.RIGHT;
 		int x = getX() + speed;
 		if (x + getWidth() > gs.getWidth()) {
 			x = (gs.getWidth() - getWidth());
@@ -108,6 +114,7 @@ public class Player extends GameObject {
 	}
 
 	public void moveUp() {
+		face = Player.Face.UP;
 		int y = getY() - speed;
 		if (y < 0) {
 			y = 0;
@@ -117,6 +124,7 @@ public class Player extends GameObject {
 	}
 
 	public void moveDown() {
+		face = Player.Face.DOWN;
 		int y = getY() + speed;
 		
 		if (y + getHeight() > gs.getHeight()) {

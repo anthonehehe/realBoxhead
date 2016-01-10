@@ -12,7 +12,7 @@ public class GameObject extends JLabel {
 //	int width;
 
 	public boolean collidesWith(Object object) {
-		return false;
+		return this.getBounds().intersects(object.getBounds());
 	}
 
 }
