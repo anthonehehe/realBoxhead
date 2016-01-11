@@ -19,6 +19,7 @@ public class Screen extends JFrame  {
 	public OptionsMenuStage optStage;
 	public EndlessGameStage eStage;
 	public CardLayout cl = new CardLayout();
+	public Spawn spawn;
 	
 	
 	/**

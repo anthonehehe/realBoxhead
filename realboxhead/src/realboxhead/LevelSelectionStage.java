@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 public class LevelSelectionStage extends JPanel{
 	
 	Screen screen;
+	Spawn spawn;
 	
 	/**
 	 * Constructor for the level selection stage, 
@@ -41,9 +42,11 @@ public class LevelSelectionStage extends JPanel{
 			public void mouseClicked(MouseEvent arg0) {
 				screen.cl.show(screen.getContentPane(), "classic" );
 				screen.screen = "classic";
+				screen.spawn = new Spawn(screen);
 			}
 		});
 		this.add(classicModeButton);
+		
 		
 
 		JButton endlessModeButton = new JButton("Endless Mode");

@@ -80,7 +80,7 @@ public class Player extends GameObject {
 		bullets.add(p);
 	}
 	
-	public ArrayList getBullets() {
+	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
 	/*

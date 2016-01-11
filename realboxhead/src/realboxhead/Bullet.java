@@ -14,9 +14,10 @@ public class Bullet extends GameObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-		private int x, y, speedX, speedY;
+		private int x, y, speed;
 		private boolean visible;
 		private final Face face;
+		public int dmg = 10;
 		
 		/**
 		 * Constructor for bullet, checking where player
@@ -36,8 +37,7 @@ public class Bullet extends GameObject {
 			// 		add speedX to bullet.x
 			//	while bullet.y does not equal mouse.y
 			// 		add speedY to bullet.y
-			speedX = 7;
-			speedY = 7;
+			speed = 7;
 			visible = true;
 		}
 		/**
@@ -47,19 +47,19 @@ public class Bullet extends GameObject {
 		 */
 		public void update(){
 			if (face == Player.Face.LEFT) {
-				x -= speedX;
+				x -= speed;
 			}
 			
 			if (face == Player.Face.RIGHT) {
-				x += speedX;
+				x += speed;
 			}
 			
 			if (face == Player.Face.UP) {
-				y -= speedY;
+				y -= speed;
 			}
 			
 			if (face == Player.Face.DOWN) {
-				y += speedY;
+				y += speed;
 			}
 			
 			if (x > player.gs.getWidth()){
@@ -88,8 +88,8 @@ public class Bullet extends GameObject {
 			return y;
 		}
 
-		public int getSpeedX() {
-			return speedX;
+		public int getSpeed() {
+			return speed;
 		}
 
 		public boolean isVisible() {
@@ -104,12 +104,24 @@ public class Bullet extends GameObject {
 			this.y = y;
 		}
 
-		public void setSpeedX(int speedX) {
-			this.speedX = speedX;
+		public void setSpeed(int speed) {
+			this.speed = speed;
 		}
 
 		public void setVisible(boolean visible) {
 			this.visible = visible;
+		}
+		
+		/**
+		 * 
+		 * @param id
+		 * @return value using if statements
+		 * ex. if(shotgun) {
+		 * return 10;
+		 */
+		
+		public int getDmg() {
+			return dmg;
 		}
 		
 	}

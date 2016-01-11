@@ -11,8 +11,8 @@ public class GameObject extends JLabel {
 //	int height;
 //	int width;
 
-	public boolean collidesWith(Object object) {
-		return this.getBounds().intersects(object.getBounds());
+	public boolean collidesWith(GameObject gameObject) {
+		return this.getBounds().intersects(gameObject.getBounds());
 	}
 
 }

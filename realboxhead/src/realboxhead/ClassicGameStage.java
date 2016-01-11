@@ -16,6 +16,7 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	Screen screen;
+	Spawn spawn;
 	Player player;
 	Timer timer;
 
@@ -28,7 +29,7 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 
 	public ClassicGameStage(Screen screen) {
 		this.screen = screen;
-		//setBackground(Color.GREEN);
+		// setBackground(Color.GREEN);
 		setBounds(0, 0, screen.getWidth(), screen.getHeight());
 		setVisible(true);
 		// this.setLayout(null);
@@ -46,11 +47,17 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 	protected void paintComponent(Graphics g) {
 		g.clearRect(0, 0, getWidth(), getHeight());
 		// player.draw(g);
-		// g.setColor(Color.GRAY);
+		g.setColor(Color.GREEN);
+		if (screen.spawn != null){
+			screen.spawn.draw(g);
+			System.out.println("draw");
+		}
 		player.movement();
 
 		/**
-		 * 
+		 * Loops through every bullet,
+		 * moving it if it's visible, and 
+		 * removing it if it's not
 		 */
 		ArrayList bullets = player.getBullets();
 		for (int i = 0; i < bullets.size(); i++) {
@@ -64,11 +71,11 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 			}
 		}
 
-//		ArrayList bullets1 = player.getBullets();
-//		for (int i = 0; i < bullets1.size(); i++) {
-//			Bullet p = (Bullet) bullets1.get(i);
-//
-//		}
+		// ArrayList bullets1 = player.getBullets();
+		// for (int i = 0; i < bullets1.size(); i++) {
+		// Bullet p = (Bullet) bullets1.get(i);
+		//
+		// }
 
 		player.getIcon().paintIcon(this, g, player.getLocation().x,
 				player.getLocation().y);
@@ -78,10 +85,40 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 
 	@Override
 	/**
-	 * Calls the paintComponent method at 
-	 * a rate based on the timer
+	 *Checks for collisions and 
+	 *updates the screen at a rate
+	 *set by the timer
 	 */
 	public void actionPerformed(ActionEvent e) {
+		collisions();
+		update();
 		repaint();
 	}
+
+	private void update() {
+		// TODO Auto-generated method stub
+		if (screen.spawn != null) {
+			screen.spawn.monMove();
+			System.out.println("moved");
+		}	
+	}
+
+	private void collisions() {
+		// TODO Auto-generated method stub
+		if (screen.spawn != null) {
+			ArrayList<Enemy> enemy = screen.spawn.getEnemies();
+			ArrayList<Bullet> bullet = player.getBullets();
+			for (int a = 0; a < bullet.size(); a++) {
+				for (int b = 0; b < enemy.size(); b++) {
+					if (bullet.get(a).collidesWith(enemy.get(b))) {
+						enemy.get(b).health -= bullet.get(a).getDmg();
+						if (enemy.get(b).health < 1) {
+							enemy.remove(b);
+						}
+					}
+				}
+			}
+		}
+	}
+
 }
