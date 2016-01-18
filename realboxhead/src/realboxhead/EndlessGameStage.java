@@ -21,12 +21,10 @@ public class EndlessGameStage extends JPanel implements ActionListener {
 		this.screen = screen;
 		setBounds(0, 0, screen.getWidth(), screen.getHeight());
 		setVisible(true);
-		screen.goStage = new GameOverStage(screen, this);
-
 		this.timer = new Timer(1000 / 120, this);
 		this.player = new Player(this, "eian",150);
 		this.timer.start();
-		Weapon weapon = new Weapon(100,200,999,999,0,999);
+		player.weapon = new Weapon(100,200,999,999,0,999);
 	}
 
 	@Override
@@ -97,6 +95,7 @@ public class EndlessGameStage extends JPanel implements ActionListener {
 			screen.spawn.getEnemies().clear();
 			screen.spawn.spawnRate.stop();
 			timer.stop();
+			screen.goStage.stage = this;
 			screen.cl.show(screen.getContentPane(), "gameover");
 			HighScores.saveScore("classic", player.eScore);
 		}

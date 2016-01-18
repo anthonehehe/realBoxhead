@@ -15,7 +15,7 @@ public class Player extends GameObject {
 	private static final long serialVersionUID = 1L;
 	JPanel gs;
 	int health;
-	public int speed = 3;
+	public int speed = 4;
 	public int width = 45;
 	public int height = 60;
 	public int cScore = 0;

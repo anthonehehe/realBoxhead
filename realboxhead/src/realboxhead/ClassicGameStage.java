@@ -31,10 +31,8 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 		this.screen = screen;
 		setBounds(0, 0, screen.getWidth(), screen.getHeight());
 		setVisible(true);
-		screen.goStage = new GameOverStage(screen, this);
-		// this.setLayout(null);
 		System.out.println(this.getLayout().toString());
-		this.timer = new Timer(1000 / 120, this);
+		this.timer = new Timer(1000 / 60, this);
 		this.player = new Player(this, "ean",100);
 		this.timer.start();
 	}
@@ -108,6 +106,7 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 			screen.spawn.getEnemies().clear();
 			screen.spawn.spawnRate.stop();
 			timer.stop();
+			screen.goStage.stage = this;
 			screen.cl.show(screen.getContentPane(), "gameover");
 			HighScores.saveScore("classic", player.cScore);
 		}

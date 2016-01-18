@@ -39,6 +39,7 @@ public class Screen extends JFrame  {
 		gStage = new ClassicGameStage(this);
 		eStage = new EndlessGameStage(this);
 		optStage = new OptionsMenuStage(this);
+		goStage = new GameOverStage(this);
 		
 		pane = getContentPane();
 		pane.setLayout(cl);

@@ -12,9 +12,8 @@ public class GameOverStage extends JPanel {
 	Screen screen;
 	JPanel stage;
 
-	public GameOverStage(Screen screen, JPanel stage) {
+	public GameOverStage(Screen screen) {
 		this.screen = screen;
-		this.stage = stage;
 		setBackground(Color.BLUE);
 		setVisible(true);
 
@@ -26,6 +25,7 @@ public class GameOverStage extends JPanel {
 					ClassicGameStage gStage = (ClassicGameStage) stage;
 					gStage.player = new Player(gStage, "ean", 100);
 					gStage.timer.start();
+					gStage.screen.spawn = new Spawn(screen);
 					gStage.screen.spawn.spawnRate.start();
 					screen.cl.show(screen.getContentPane(), "classic");
 					screen.screen = "classic";
@@ -33,6 +33,7 @@ public class GameOverStage extends JPanel {
 					EndlessGameStage eStage = (EndlessGameStage) stage;
 					eStage.player = new Player(eStage, "ean", 150);
 					eStage.timer.start();
+					eStage.screen.spawn = new Spawn(screen);
 					eStage.screen.spawn.spawnRate.start();
 					screen.cl.show(screen.getContentPane(), "endless");
 					screen.screen = "endless";

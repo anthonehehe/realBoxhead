@@ -41,7 +41,6 @@ public class Bullet extends GameObject {
 		 * it needs to be removed or not
 		 */
 		public void update(){
-			speed = 2;
 			
 			if (face == Player.Face.LEFT) {
 				this.x -= speed;
