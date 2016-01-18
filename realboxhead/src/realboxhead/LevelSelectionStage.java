@@ -55,6 +55,7 @@ public class LevelSelectionStage extends JPanel{
 			public void mouseClicked(MouseEvent arg0) {
 				screen.cl.show(screen.getContentPane(), "endless" );
 				screen.screen = "endless";
+				screen.spawn = new Spawn(screen);
 			}
 		});
 		this.add(endlessModeButton);

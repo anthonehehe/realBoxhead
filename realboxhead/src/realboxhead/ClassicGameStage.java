@@ -1,5 +1,6 @@
 package realboxhead;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -16,7 +17,6 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	Screen screen;
-	Spawn spawn;
 	Player player;
 	Timer timer;
 
@@ -29,13 +29,13 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 
 	public ClassicGameStage(Screen screen) {
 		this.screen = screen;
-		// setBackground(Color.GREEN);
 		setBounds(0, 0, screen.getWidth(), screen.getHeight());
 		setVisible(true);
+		screen.goStage = new GameOverStage(screen, this);
 		// this.setLayout(null);
 		System.out.println(this.getLayout().toString());
 		this.timer = new Timer(1000 / 120, this);
-		this.player = new Player(this, "ean");
+		this.player = new Player(this, "ean",100);
 		this.timer.start();
 	}
 
@@ -46,11 +46,11 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 	 */
 	protected void paintComponent(Graphics g) {
 		g.clearRect(0, 0, getWidth(), getHeight());
-		// player.draw(g);
+		g.setColor(Color.GRAY);
+		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.GREEN);
 		if (screen.spawn != null){
 			screen.spawn.draw(g);
-			System.out.println("draw");
 		}
 		player.movement();
 
@@ -59,27 +59,26 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 		 * moving it if it's visible, and 
 		 * removing it if it's not
 		 */
-		ArrayList bullets = player.getBullets();
-		for (int i = 0; i < bullets.size(); i++) {
-			Bullet p = (Bullet) bullets.get(i);
+		for (int i = 0; i < player.bullets.size(); i++) {
+			Bullet p = player.bullets.get(i);
 			if (p.isVisible() == true) {
 				g.setColor(Color.YELLOW);
 				g.fillRect(p.getX(), p.getY(), 5, 5);
 				p.update();
 			} else {
-				bullets.remove(i);
+				player.bullets.remove(i);
 			}
 		}
 
-		// ArrayList bullets1 = player.getBullets();
-		// for (int i = 0; i < bullets1.size(); i++) {
-		// Bullet p = (Bullet) bullets1.get(i);
-		//
-		// }
-
-		player.getIcon().paintIcon(this, g, player.getLocation().x,
-				player.getLocation().y);
-		// System.out.println(player.getX() + ":" + player.getY());
+		player.getIcon().paintIcon(this, g, player.x, player.y);
+		
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		g.drawString("COMBO: " + player.cCombo, getWidth() - 100, 20);
+		
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		g.drawString("HEALTH: " + player.health, 10, 20);
 
 	}
 
@@ -90,34 +89,72 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 	 *set by the timer
 	 */
 	public void actionPerformed(ActionEvent e) {
-		collisions();
+
+		if (screen.spawn != null) {
+			screen.spawn.player = player;
+		}
+
+		if (screen.spawn != null && System.currentTimeMillis() - player.lastKill > screen.spawn.interval + 1000) {
+			player.lastKill = System.currentTimeMillis();
+			player.cCombo--;
+			if (player.cCombo < 1) {
+				player.cCombo = 0;
+			}
+		}
+
 		update();
+		collisions();
+		if (screen.spawn != null && player.health < 1) {
+			screen.spawn.getEnemies().clear();
+			screen.spawn.spawnRate.stop();
+			timer.stop();
+			screen.cl.show(screen.getContentPane(), "gameover");
+			HighScores.saveScore("classic", player.cScore);
+		}
 		repaint();
 	}
 
 	private void update() {
-		// TODO Auto-generated method stub
 		if (screen.spawn != null) {
 			screen.spawn.monMove();
-			System.out.println("moved");
+			//System.out.println("moved");
 		}	
 	}
 
 	private void collisions() {
-		// TODO Auto-generated method stub
 		if (screen.spawn != null) {
 			ArrayList<Enemy> enemy = screen.spawn.getEnemies();
 			ArrayList<Bullet> bullet = player.getBullets();
+			
 			for (int a = 0; a < bullet.size(); a++) {
-				for (int b = 0; b < enemy.size(); b++) {
-					if (bullet.get(a).collidesWith(enemy.get(b))) {
-						enemy.get(b).health -= bullet.get(a).getDmg();
-						if (enemy.get(b).health < 1) {
-							enemy.remove(b);
+				Bullet b = bullet.get(a);
+				for (int i = 0; i < enemy.size(); i++) {
+					Enemy e = enemy.get(i);
+					if (b.collidesWith(e)) {
+						e.health -= b.getDmg();
+						if (e.health < 1) {
+							player.cScore++;
+							player.health += 10;
+							if (player.health > 150) {
+								player.health = 150;
+							}
+							if (System.currentTimeMillis() - player.lastKill < screen.spawn.interval + 1000) {
+								player.cCombo++;
+								player.lastKill = System.currentTimeMillis();
+							}
+							enemy.remove(i);
 						}
+						bullet.remove(a);
+						break;
 					}
 				}
 			}
+			for (Enemy e : enemy) {
+				if (e.collidesWith(player)) {
+					player.hit(25);
+				}
+			}
+			
 		}
 	}
 

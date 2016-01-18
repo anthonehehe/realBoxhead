@@ -18,6 +18,7 @@ public class Screen extends JFrame  {
 	public ClassicGameStage gStage;
 	public OptionsMenuStage optStage;
 	public EndlessGameStage eStage;
+	public GameOverStage goStage;
 	public CardLayout cl = new CardLayout();
 	public Spawn spawn;
 	
@@ -46,6 +47,7 @@ public class Screen extends JFrame  {
 		pane.add(gStage, "classic");
 		pane.add(eStage, "endless");
 		pane.add(optStage, "options");
+		pane.add(goStage, "gameover");
 		pane.setVisible(true);
 		init();
 

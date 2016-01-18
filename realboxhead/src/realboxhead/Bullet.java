@@ -14,7 +14,8 @@ public class Bullet extends GameObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-		private int x, y, speed;
+		//public int x, y;
+	    public int speed;
 		private boolean visible;
 		private final Face face;
 		public int dmg = 10;
@@ -26,19 +27,13 @@ public class Bullet extends GameObject {
 		 * @param startX
 		 * @param startY
 		 */
-		public Bullet(Player player, int startX, int startY){
-			x = startX;
-			y = startY;
+		public Bullet(Player player, int startX, int startY, int height, int width, int dmg){
 			this.player = player;
 			this.face = player.face;
-		
-			// while bullet.x + bullet.y does not equal mouse.x + mouse.y
-			//	while bullet.x does not equal mouse.x 
-			// 		add speedX to bullet.x
-			//	while bullet.y does not equal mouse.y
-			// 		add speedY to bullet.y
+			this.setBounds(startX ,startY , width, height);
 			speed = 7;
 			visible = true;
+			this.dmg = dmg;
 		}
 		/**
 		 * Updates bullet location based on speed variable, 
@@ -46,20 +41,22 @@ public class Bullet extends GameObject {
 		 * it needs to be removed or not
 		 */
 		public void update(){
+			speed = 2;
+			
 			if (face == Player.Face.LEFT) {
-				x -= speed;
+				this.x -= speed;
 			}
 			
 			if (face == Player.Face.RIGHT) {
-				x += speed;
+				this.x += speed;
 			}
 			
 			if (face == Player.Face.UP) {
-				y -= speed;
+				this.y -= speed;
 			}
 			
 			if (face == Player.Face.DOWN) {
-				y += speed;
+				this.y += speed;
 			}
 			
 			if (x > player.gs.getWidth()){
