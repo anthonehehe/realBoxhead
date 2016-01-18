@@ -21,6 +21,7 @@ public class Player extends GameObject {
 	public int cScore = 0;
 	public int eScore = 0;
 	public int cCombo = 0;
+	public int cMaxCombo = 0;
 	public int eCombo = 0;
 	public long lastKill = 0;
 	public long lastShot = 0;
@@ -77,6 +78,7 @@ public class Player extends GameObject {
 			weapon.reload();
 		}
 	}
+	
 	
 	/**
 	 * Sets delay that player can take damage 

@@ -15,7 +15,9 @@ public class Input implements KeyListener {
 	 * Checks if any of the arrow
 	 * keys have been pressed, and changes the
 	 * player's respective direction boolean to true
-	 * when they are pressed
+	 * when they are pressed, fires bullets in a certain direction
+	 * based on which fire key is pressed, and gives player access
+	 * to certain weapons based on the player's combo
 	 */
 	public void keyPressed(KeyEvent e) {
 		Player player = (screen.screen.equals("classic") ? screen.gStage.player
@@ -54,19 +56,19 @@ public class Input implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_1) {
 			player.weapon = new Weapon();
 		}
-		if (player.cCombo >= 5) {
+		if (player.cMaxCombo >= 5) {
 			if (e.getKeyCode() == KeyEvent.VK_2) {
-				player.weapon = new Weapon(30, 30, 30, 200, 1, 30);
+				player.weapon = new Weapon(30, 30, 30, 200, 1, 30, "SMG");
 			}
 		}
-		if (player.cCombo >= 20) {
+		if (player.cMaxCombo >= 20) {
 			if (e.getKeyCode() == KeyEvent.VK_3) {
-				player.weapon = new Weapon(35, 100, 8, 64, 2, 8);
+				player.weapon = new Weapon(35, 100, 8, 64, 2, 8,"Shotgun");
 			}
 		}
-		if (player.cCombo >= 75) {
+		if (player.cMaxCombo >= 75) {
 			if (e.getKeyCode() == KeyEvent.VK_4) {
-				player.weapon = new Weapon(90,120,5,25,2,5);
+				player.weapon = new Weapon(90,120,5,25,2,5,"RPG");
 			}
 		}
 	}

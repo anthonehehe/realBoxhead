@@ -9,6 +9,7 @@ public class Weapon extends GameObject {
 	int clipSize; // max ammo in a clip
 	int ammoInClip; // ammo left in the clip
 	int weight;
+	String id;
 	//int spread;
 	/**
 	 * 
@@ -45,19 +46,20 @@ public class Weapon extends GameObject {
 		}
 	}*/
 
-	Weapon(int minDmg, int maxDmg, int clipSize, int ammoLeft, int weight, int ammoInClip) {
+	Weapon(int minDmg, int maxDmg, int clipSize, int ammoLeft, int weight, int ammoInClip, String id) {
 		this.minDmg = minDmg;
 		this.maxDmg = maxDmg;
 		this.ammoInClip = ammoInClip;
 		this.clipSize = clipSize;
 		this.totalAmmo = ammoLeft;
 		this.weight = weight;
+		this.id = id;
 		//this.spread = spread;
 	}
 
 	// Default weapon, pistol
 	Weapon() {
-		this(20, 20, 20, 9999, 0, 20);
+		this(20, 20, 20, 9999, 0, 20, "Pistol");
 	}
 	
 }

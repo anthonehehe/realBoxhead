@@ -24,25 +24,32 @@ public class Enemy extends GameObject {
 		setBounds(x, y, width, height);
 	}
 
+	/**
+	 * Moves the enemy towards the player's location
+	 */
 	public void move() {
 		Player player = (screen.screen.equals("classic") ? screen.gStage.player
 				: screen.eStage.player);
-		int xTemp = this.x - player.x;
-		int yTemp = this.y - player.y;
-		if (xTemp < 0) { 
+		int xTemp = this.x - player.x; // distance between the x of player and enemy
+		int yTemp = this.y - player.y; // distance between the y of player and enemy
+		if (xTemp < 0) { // if player is to the enemy's right
 			x += speed;
 		}
-		if (xTemp > 0) { 
+		if (xTemp > 0) { // if player is to the enemy's left
 			x -= speed;
 		}
-		if (yTemp < 0) { 
+		if (yTemp < 0) { // if player is below enemy
 			y += speed;
 		}
-		if (yTemp > 0) {
+		if (yTemp > 0) { // if player is above enemy 
 			y -= speed;
 		}
 	}
 	
+	/**
+	 *  Draws the enemy and a health bar for it
+	 * @param g
+	 */
 	public void draw(Graphics g) {
 		int w = (width / 10) * health;
 		w /= 4;

@@ -77,6 +77,10 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		g.drawString("HEALTH: " + player.health, 10, 20);
+		
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		g.drawString("WEAPON: " + player.weapon.id, 320, 20);
 
 	}
 
@@ -113,6 +117,9 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 		repaint();
 	}
 
+	/**
+	 * moves the enemy 
+	 */
 	private void update() {
 		if (screen.spawn != null) {
 			screen.spawn.monMove();
@@ -120,6 +127,9 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 		}	
 	}
 
+	/**
+	 * Checks for collisions between gameobjects
+	 */
 	private void collisions() {
 		if (screen.spawn != null) {
 			ArrayList<Enemy> enemy = screen.spawn.getEnemies();
@@ -139,6 +149,9 @@ public class ClassicGameStage extends JPanel implements ActionListener {
 							}
 							if (System.currentTimeMillis() - player.lastKill < screen.spawn.interval + 1000) {
 								player.cCombo++;
+								if (player.cCombo > player.cMaxCombo) {
+									player.cMaxCombo = player.cCombo;
+								}
 								player.lastKill = System.currentTimeMillis();
 							}
 							enemy.remove(i);

@@ -24,7 +24,7 @@ public class EndlessGameStage extends JPanel implements ActionListener {
 		this.timer = new Timer(1000 / 120, this);
 		this.player = new Player(this, "eian",150);
 		this.timer.start();
-		player.weapon = new Weapon(100,200,999,999,0,999);
+		player.weapon = new Weapon(100,200,999,999,0,999,"Minigun");
 	}
 
 	@Override
@@ -67,6 +67,10 @@ public class EndlessGameStage extends JPanel implements ActionListener {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		g.drawString("HEALTH: " + player.health, 10, 20);
+		
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		g.drawString("WEAPON: " + player.weapon.id, 320, 20);
 	}
 
 	@Override
@@ -103,7 +107,7 @@ public class EndlessGameStage extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * moves the enemy
 	 */
 	private void update() {
 		if (screen.spawn != null) {
@@ -112,6 +116,9 @@ public class EndlessGameStage extends JPanel implements ActionListener {
 		}	
 	}
 
+	/**
+	 * Checks for collisions between gameobjects
+	 */
 	private void collisions() {
 		if (screen.spawn != null) {
 			ArrayList<Enemy> enemy = screen.spawn.getEnemies();
